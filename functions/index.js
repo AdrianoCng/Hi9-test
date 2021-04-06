@@ -21,6 +21,10 @@ app.post("/users", async (req, res) => {
     try {
         const { username, email, age } = req.body;
 
+        if (!username || !email || !age) throw new Error("field missing");
+
+        if (isNaN(age) || age < 0) throw new Error("Invalid age");
+
         const data = {
             username,
             email,
